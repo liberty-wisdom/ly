@@ -47,21 +47,18 @@
         <!-- web开发包：包含Tomcat和Springmvc -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId><exclusions>
-            <exclusion>
-                <artifactId>logback-classic</artifactId>
-                <groupId>ch.qos.logback</groupId>
-            </exclusion>
-            <exclusion>
-                <artifactId>log4j-over-slf4j</artifactId>
-                <groupId>org.slf4j</groupId>
-            </exclusion>
-        </exclusions>
-        </dependency>
+            <artifactId>spring-boot-starter-web</artifactId>
+                   </dependency>
         <!-- jdbc链接容器 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--lombok,使用slf4注解-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.16</version>
         </dependency>
     </dependencies>
 

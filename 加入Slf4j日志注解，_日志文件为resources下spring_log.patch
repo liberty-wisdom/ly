@@ -1,0 +1,156 @@
+Index: src/main/resources/application.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/application.yml	(revision 8ebee8f9f5c13993982d671cef2e7e8b04df9305)
++++ src/main/resources/application.yml	(date 1633450421756)
+@@ -33,3 +33,5 @@
+     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+   mvc:
+     static-path-pattern: /static/**
++logging:
++  path: D:\IdeaPorjects\wisdom_ly\src\main\resources
+\ No newline at end of file
+Index: src/main/java/com/zh/controller/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zh/controller/UserController.java	(revision 8ebee8f9f5c13993982d671cef2e7e8b04df9305)
++++ src/main/java/com/zh/controller/UserController.java	(date 1633449814428)
+@@ -3,8 +3,7 @@
+ import com.zh.bean.User;
+ import com.zh.bean.Version;
+ import com.zh.service.UserService;
+-import org.slf4j.Logger;
+-import org.slf4j.LoggerFactory;
++import lombok.extern.slf4j.Slf4j;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Controller;
+ import org.springframework.ui.Model;
+@@ -16,14 +15,13 @@
+ import javax.servlet.http.HttpSession;
+ import java.util.List;
+ 
++@Slf4j
+ @Controller
+ public class UserController {
+     @Autowired
+     private UserService userService;
+     @Autowired
+     private Version version;
+-    @Autowired
+-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+     /*
+     * --> 添加页面
+     * */
+@@ -102,7 +100,7 @@
+     @RequestMapping("toindex")
+     public String toIndex(Model model){
+         model.addAttribute("v",version.getV());
+-        logger.info("用户登录成功，进入系统主页");
++        log.info("用户登录成功，获取到版本号,"+version.getV()+"前往主页-->");
+         return "index_in";
+     }
+     /*
+Index: src/main/resources/spring.log
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/spring.log	(date 1633450475975)
++++ src/main/resources/spring.log	(date 1633450475975)
+@@ -0,0 +1,55 @@
++2021-10-06 00:14:06.940  INFO 6312 --- [restartedMain] com.zh.WisdomLyApplication               : Starting WisdomLyApplication on DESKTOP-LHPTASQ with PID 6312 (D:\IdeaPorjects\wisdom_ly\target\classes started by dell in D:\IdeaPorjects\wisdom_ly)
++2021-10-06 00:14:06.943  INFO 6312 --- [restartedMain] com.zh.WisdomLyApplication               : No active profile set, falling back to default profiles: default
++2021-10-06 00:14:06.994  INFO 6312 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2edc0324: startup date [Wed Oct 06 00:14:06 CST 2021]; root of context hierarchy
++2021-10-06 00:14:08.447  INFO 6312 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$45d6946a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
++2021-10-06 00:14:10.080  INFO 6312 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
++2021-10-06 00:14:10.109  INFO 6312 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
++2021-10-06 00:14:10.110  INFO 6312 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.34
++2021-10-06 00:14:10.118  INFO 6312 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_301\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\apache-maven-3.6.3\bin;C:\Program Files\Java\jdk1.8.0_301\bin;C:\Users\dell\AppData\Local\Microsoft\WindowsApps;;.]
++2021-10-06 00:14:10.246  INFO 6312 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
++2021-10-06 00:14:10.247  INFO 6312 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3253 ms
++2021-10-06 00:14:10.315  INFO 6312 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
++2021-10-06 00:14:10.318  INFO 6312 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
++2021-10-06 00:14:10.319  INFO 6312 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
++2021-10-06 00:14:10.319  INFO 6312 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
++2021-10-06 00:14:10.319  INFO 6312 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
++2021-10-06 00:14:10.474  INFO 6312 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
++2021-10-06 00:14:10.485  INFO 6312 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
++	name: default
++	...]
++2021-10-06 00:14:10.606  INFO 6312 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
++2021-10-06 00:14:10.607  INFO 6312 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
++2021-10-06 00:14:10.638  INFO 6312 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
++2021-10-06 00:14:10.717  INFO 6312 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
++2021-10-06 00:14:11.888  INFO 6312 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
++2021-10-06 00:14:11.911  INFO 6312 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
++2021-10-06 00:14:14.722  INFO 6312 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
++2021-10-06 00:14:15.137  INFO 6312 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
++2021-10-06 00:14:15.391  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2edc0324: startup date [Wed Oct 06 00:14:06 CST 2021]; root of context hierarchy
++2021-10-06 00:14:15.422  WARN 6312 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
++2021-10-06 00:14:15.491  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/save]}" onto public java.lang.String com.zh.controller.UserController.save(com.zh.bean.User)
++2021-10-06 00:14:15.492  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/userList]}" onto public java.lang.String com.zh.controller.UserController.userList(org.springframework.ui.Model)
++2021-10-06 00:14:15.492  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/toindex]}" onto public java.lang.String com.zh.controller.UserController.toIndex(org.springframework.ui.Model)
++2021-10-06 00:14:15.493  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/updateOneUser]}" onto public java.lang.String com.zh.controller.UserController.updateOneUser(com.zh.bean.User)
++2021-10-06 00:14:15.493  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/findOneUser/{id}]}" onto public java.lang.String com.zh.controller.UserController.findOneUser(java.lang.Long,org.springframework.ui.Model)
++2021-10-06 00:14:15.493  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/loginIn]}" onto public int com.zh.controller.UserController.loginIn(java.lang.String,java.lang.String,javax.servlet.http.HttpSession)
++2021-10-06 00:14:15.494  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/toadd]}" onto public java.lang.String com.zh.controller.UserController.toadd()
++2021-10-06 00:14:15.494  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/deleteUser/{id}]}" onto public java.lang.String com.zh.controller.UserController.deleteUser(java.lang.Long)
++2021-10-06 00:14:15.494  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/loginOut]}" onto public java.lang.String com.zh.controller.UserController.loginOut(javax.servlet.http.HttpSession)
++2021-10-06 00:14:15.497  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
++2021-10-06 00:14:15.498  INFO 6312 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
++2021-10-06 00:14:15.539  INFO 6312 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
++2021-10-06 00:14:15.539  INFO 6312 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/static/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
++2021-10-06 00:14:15.616  WARN 6312 --- [restartedMain] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
++2021-10-06 00:14:15.692  INFO 6312 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
++2021-10-06 00:14:15.892  INFO 6312 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
++2021-10-06 00:14:15.921  INFO 6312 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
++2021-10-06 00:14:15.922  INFO 6312 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
++2021-10-06 00:14:15.927  INFO 6312 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
++2021-10-06 00:14:15.954  INFO 6312 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
++2021-10-06 00:14:15.957  INFO 6312 --- [restartedMain] com.zh.WisdomLyApplication               : Started WisdomLyApplication in 9.547 seconds (JVM running for 11.113)
++2021-10-06 00:14:20.569  INFO 6312 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
++2021-10-06 00:14:20.569  INFO 6312 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
++2021-10-06 00:14:20.598  INFO 6312 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 29 ms
++2021-10-06 00:14:35.479  INFO 6312 --- [http-nio-80-exec-3] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
++2021-10-06 00:14:35.975  INFO 6312 --- [http-nio-80-exec-4] com.zh.controller.UserController         : 用户登录成功，获取到版本号,ly.1.0.1.20210918前往主页-->
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(revision 8ebee8f9f5c13993982d671cef2e7e8b04df9305)
++++ pom.xml	(date 1633448949812)
+@@ -47,21 +47,18 @@
+         <!-- web开发包：包含Tomcat和Springmvc -->
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+-            <artifactId>spring-boot-starter-web</artifactId><exclusions>
+-            <exclusion>
+-                <artifactId>logback-classic</artifactId>
+-                <groupId>ch.qos.logback</groupId>
+-            </exclusion>
+-            <exclusion>
+-                <artifactId>log4j-over-slf4j</artifactId>
+-                <groupId>org.slf4j</groupId>
+-            </exclusion>
+-        </exclusions>
+-        </dependency>
++            <artifactId>spring-boot-starter-web</artifactId>
++                   </dependency>
+         <!-- jdbc链接容器 -->
+         <dependency>
+             <groupId>mysql</groupId>
+             <artifactId>mysql-connector-java</artifactId>
++        </dependency>
++        <!--lombok,使用slf4注解-->
++        <dependency>
++            <groupId>org.projectlombok</groupId>
++            <artifactId>lombok</artifactId>
++            <version>1.16.16</version>
+         </dependency>
+     </dependencies>
+ 

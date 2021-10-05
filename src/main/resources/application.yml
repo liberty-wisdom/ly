@@ -33,3 +33,5 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   mvc:
     static-path-pattern: /static/**
+logging:
+  path: D:\IdeaPorjects\wisdom_ly\src\main\resources

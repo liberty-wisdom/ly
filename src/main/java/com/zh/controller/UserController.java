@@ -3,8 +3,7 @@ package com.zh.controller;
 import com.zh.bean.User;
 import com.zh.bean.Version;
 import com.zh.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,14 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@Slf4j
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
     private Version version;
-    @Autowired
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     /*
     * --> 添加页面
     * */
@@ -102,7 +100,7 @@ public class UserController {
     @RequestMapping("toindex")
     public String toIndex(Model model){
         model.addAttribute("v",version.getV());
-        logger.info("用户登录成功，进入系统主页");
+        log.info("用户登录成功，获取到版本号,"+version.getV()+"前往主页-->");
         return "index_in";
     }
     /*
