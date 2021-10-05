@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'修改'+${oneUser.name}+'的信息'"></title>
+</head>
+<body>
+<form action="/updateOneUser" method="post">
+    编号：<input type="text"  th:value="${oneUser.id}"   name="id" readonly="readonly"><br>
+    姓名：<input type="text"  th:value="${oneUser.name}" name="name"><br>
+    密码：<input type="text"  th:value="${oneUser.password}"  name="password"><br>
+    状态：<input type="text"  th:value="${oneUser.status}" name="status"><br>
+    介绍：<input type="text"  th:value="${oneUser.info}" name="info"><br>
+    权限：<input type="text"  th:value="${oneUser.power}" name="power"><br>
+    <button>确定修改</button>
+</form>
+<a href="/userList"><button>查看用户信息</button></a>
+<a href="/loginOut"><button>退出登录</button></a>
+</body>
+</html>

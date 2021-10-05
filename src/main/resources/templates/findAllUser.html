@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+</head>
+<body>
+<a href="/toadd"><button>返回添加页面</button></a>
+<a href="/loginOut"><button>退出登录</button></a>
+<div align="center">
+    <b th:text="'当前登录账户：'+${session.newName}"></b>
+    <table style="border: 1px solid">
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>密码</th>
+            <th>状态</th>
+            <th>介绍</th>
+            <th>权限</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="user:${userList}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.status}"></td>
+            <td th:text="${user.info}"></td>
+            <td th:text="${user.power}"></td>
+            <td>
+                <a th:href="@{'/findOneUser/'+${user.id}}"><button>修改</button></a>
+                <a th:href="@{'/deleteUser/'+${user.id}}"><button>删除</button></a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>Welcome To Login</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.css">
+    <link rel="stylesheet" href="static/css/slick.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+
+</head>
+
+<body>
+    <div id="eskimo-site-wrapper">
+        <main id="eskimo-main-container">
+            <div class="container">
+                <div id="eskimo-sidebar">
+                    <div id="eskimo-sidebar-wrapper" class="d-flex align-items-start flex-column h-100 w-100">
+                        <div id="eskimo-sidebar-cell" class="w-100">
+                            <img src="static/images/logo.png" class="eskimo-logo" alt="eskimo" />
+                            <ul class="eskimo-menu-ul">
+                                <li>用户名 <input type="text" name="name" id="name"></li>
+                                <li>密码   <input type="password" name="password" id="password"></li>
+                                <div class="eskimo-author-box-btn" style="text-align: center;">
+                                    <a class="btn btn-default"  onclick="checkLogin()" style="color: white">Login In</a>
+                                    <span id="msg"></span>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $("#name").focus(function () {
+            $("#msg").html("");
+        })
+        $("#password").focus(function () {
+            $("#msg").html("");
+        })
+    })
+    function checkLogin(){
+        var user = $("#name").val();
+        var pwd = $("#password").val();
+        // alert("用户名："+user+"-----密码："+pwd);
+        //在用户名和密码去空格的前提下 判断 非空
+        if($.trim(user)==""||$.trim(pwd)==""){
+            $("#msg").html("用户名和密码都不可为空").css("color","red");
+            return false;
+        }
+        $.ajax({
+            type:"post",
+            url:"loginIn",
+            dataType:"JSON",
+            data:{"name":user,"password":pwd},
+            success:function(data){
+                // alert(data);
+                //根据data判断登录成功还是失败
+                if(data==0){
+                    //成功
+                    location.href="toindex";
+                }else{
+                    //失败
+                    $("#msg").html("用户名或密码不正确").css("color","red");
+                }
+            },
+            error:function(){
+                alert("警告：系统异常！！！");
+            }
+        });
+    }
+</script>
+</html>

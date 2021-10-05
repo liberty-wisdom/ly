@@ -1,0 +1,35 @@
+server:
+  port: 80
+  servlet:
+    session:
+      timeout: 900s
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+  datasource:
+    url: jdbc:mysql://rm-bp1c3oxax0jh4wglmto.mysql.rds.aliyuncs.com:3306/bsms?characterEncoding=utf-8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    username: wisdom
+    password: "Wisdom@99"
+    dbcp2:
+      initial-size: 10
+    tomcat:
+      max-active: 20
+      max-idle: 8
+      min-idle: 8
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  mvc:
+    static-path-pattern: /static/**
