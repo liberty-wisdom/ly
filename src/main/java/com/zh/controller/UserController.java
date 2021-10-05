@@ -22,14 +22,37 @@ public class UserController {
     private UserService userService;
     @Autowired
     private Version version;
+    @Autowired
+    private HttpSession session;
+    /*
+     *登录成功，进入主页
+     * */
+    @RequestMapping("toindex")
+    public String toIndex(Model model){
+        model.addAttribute("v",version.getV());
+        log.info("【"+session.getAttribute("newName")+"】用户登录成功，前往主页-->");
+        log.info("当前系统版本：【"+version.getV()+"】");
+        return "index_in";
+    }
+    /*
+     * 退出登录
+     * */
+    @RequestMapping("/loginOut")
+    public String loginOut(){
+        if(session.getAttribute("newName")!=null){
+            log.info("用户【"+session.getAttribute("newName")+" 】已注销！");
+//            session.removeAttribute("newName");
+            session.invalidate();
+            return "index";
+        }else{
+            return "index";
+        }
+    }
     /*
     * --> 添加页面
     * */
     @RequestMapping("/toadd")
-    public String toadd(/*Model model*/){
-       /* model.addAttribute("name","张三");
-        model.addAttribute("age",13);
-        model.addAttribute("info","新世纪好青年");*/
+    public String toadd(){
         return "addUser";
     }
 
@@ -86,7 +109,7 @@ public class UserController {
     * */
     @RequestMapping("/loginIn")
     @ResponseBody
-    public int loginIn(String name, String password,HttpSession session){
+    public int loginIn(String name, String password){
         User namePwd = userService.findByNameAndPassword(name,password);
         if(namePwd==null){
             return -1;
@@ -94,21 +117,5 @@ public class UserController {
         session.setAttribute("newName",name);
         return 0;
     }
-    /*
-    *登录成功，进入主页
-    * */
-    @RequestMapping("toindex")
-    public String toIndex(Model model){
-        model.addAttribute("v",version.getV());
-        log.info("用户登录成功，获取到版本号,"+version.getV()+"前往主页-->");
-        return "index_in";
-    }
-    /*
-    * 退出登录
-    * */
-    @RequestMapping("/loginOut")
-    public String loginOut(HttpSession session){
-        session.invalidate();
-        return "index";
-    }
+
 }
