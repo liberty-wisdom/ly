@@ -114,7 +114,10 @@ public class UserController {
         if(namePwd==null){
             return -1;
         }
+        log.info("【"+name+"】用户存在，允许登录");
         session.setAttribute("newName",name);
+        session.setAttribute("userInfo",namePwd.getInfo());
+        System.out.println(namePwd.getInfo());
         return 0;
     }
 

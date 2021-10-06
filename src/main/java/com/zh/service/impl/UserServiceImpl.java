@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
 //    @Modifying  修改时添加此注解，否则报错
-    @Query("select name,password from user where name=?1 and password =?2")
+    @Query("select name,password,info from user where name=?1 and password =?2")
     public User findByNameAndPassword(String name, String password) {
 
         return userDao.findByNameAndPassword(name,password);

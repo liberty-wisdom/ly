@@ -449,11 +449,11 @@
             <!-- AUTHOR BOX -->
             <div class="eskimo-author-box eskimo-widget">
                 <div class="eskimo-author-img">
-                    <img src="static/static/uploads/2018/05/img.jpg" alt="JOHN DOE" />
+                    <img src="static/uploads/2018/05/img.jpg" alt="${session.newName}" />
                 </div>
                 <h3><b th:text="${session.newName}"></b></h3>
                 <p class="eskimo-author-subtitle">WEB DESIGNER &amp; DEVELOPER</p>
-                <p class="eskimo-author-description">超级管理员</p>
+                <p class="eskimo-author-description" th:text="${session.userInfo}"></p>
                 <div class="eskimo-author-box-btn">
                     <a class="btn btn-default" href="/loginOut">注销</a>
                 </div>
