@@ -53,7 +53,7 @@ public class UserController {
     * */
     @RequestMapping("/toadd")
     public String toadd(){
-        return "addUser";
+        return "userManage";
     }
 
     /*
